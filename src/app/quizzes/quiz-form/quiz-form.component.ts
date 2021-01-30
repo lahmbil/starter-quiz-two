@@ -19,6 +19,7 @@ export class QuizFormComponent implements OnInit {
    * More information about Reactive Forms: https://angular.io/guide/reactive-forms#step-1-creating-a-formgroup-instance
    */
   public quizForm: FormGroup;
+  public THEME_LIST: string[] = ['Actor', 'Sport'];
 
   constructor(public formBuilder: FormBuilder, public quizService: QuizService) {
     // Form creation
