@@ -1,6 +1,11 @@
 <div class="card">
     <h2>
-        <i class="fab fa-leanpub"></i>
+      <span *ngIf="quiz.theme === 'Actor'">
+        <i class='fas fa-film'></i>
+    </span>
+    <span *ngIf="quiz.theme === 'Sport'">
+        <i class='fas fa-running'></i>
+    </span>
         Nom : {{quiz.name}}
     </h2>
     <h3>
