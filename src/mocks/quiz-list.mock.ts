@@ -23,6 +23,7 @@ export const QUIZ_LIST: Quiz[] = [
     },
     {
         name: 'Les Films',
+        theme: 'Movie',
         questions: [],
     }
 ];
