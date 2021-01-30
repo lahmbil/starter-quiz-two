@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Quiz } from '../models/quiz.model';
 import { QUIZ_LIST } from '../mocks/quiz-list.mock';
 
@@ -16,15 +17,27 @@ export class QuizService {
     * The list of quiz.
     * The list is retrieved from the mock.
     */
-  private quizzes: Quiz[] = QUIZ_LIST;
+  private quizzes: Quiz[] = [];
+  private quizzesUrl = 'https://raw.githubusercontent.com/NablaT/starter-quiz-two/master/mock-quiz.json';
 
   /**
    * Observable which contains the list of the quiz.
    * Naming convention: Add '$' at the end of the variable name to highlight it as an Observable.
    */
-  public quizzes$: BehaviorSubject<Quiz[]> = new BehaviorSubject(QUIZ_LIST);
+  public quizzes$: BehaviorSubject<Quiz[]> = new BehaviorSubject(this.quizzes);
 
-  constructor() {
+  constructor(private http: HttpClient) {
+    this.getQuizzes();
+  }
+
+  getQuizzes() {
+    this.http
+    .get<Quiz[]>(this.quizzesUrl)
+    .subscribe( (content: Quiz[]) => {
+      content.forEach( q => this.quizzes.push(q));
+      this.quizzes$.next(this.quizzes);
+      console.log(content);
+    });
   }
 
   addQuiz(quiz: Quiz) {
