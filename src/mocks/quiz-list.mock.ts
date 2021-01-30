@@ -22,7 +22,7 @@ export const QUIZ_LIST: Quiz[] = [
         questions: [],
     },
     {
-        name: 'Les Sports',
+        name: 'Les Films',
         questions: [],
     }
 ];
