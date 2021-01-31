@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Quiz } from '../models/quiz.model';
 import { QUIZ_LIST } from '../mocks/quiz-list.mock';
@@ -36,8 +36,11 @@ export class QuizService {
     .subscribe( (content: Quiz[]) => {
       content.forEach( q => this.quizzes.push(q));
       this.quizzes$.next(this.quizzes);
-      console.log(content);
     });
+  }
+
+  getQuiz(id: string): Observable<Quiz>{
+    return of(this.quizzes.find(quiz => id === quiz.id));
   }
 
   addQuiz(quiz: Quiz) {
