@@ -30,7 +30,7 @@ export class QuizService {
     this.getQuizzes();
   }
 
-  getQuizzes() {
+  getQuizzes(): void {
     this.http
     .get<Quiz[]>(this.quizzesUrl)
     .subscribe( (content: Quiz[]) => {
@@ -43,7 +43,7 @@ export class QuizService {
     return of(this.quizzes.find(quiz => id === quiz.id));
   }
 
-  addQuiz(quiz: Quiz) {
+  addQuiz(quiz: Quiz): void {
     // You need here to update the list of quiz and then update our observable (Subject) with the new list
     // More info: https://angular.io/tutorial/toh-pt6#the-searchterms-rxjs-subject
     if (quiz === null || quiz.name.length === 0 || quiz.theme.length === 0) {
@@ -54,7 +54,7 @@ export class QuizService {
     this.quizzes$.next(this.quizzes);
   }
 
-  deleteQuiz(quiz: Quiz) {
+  deleteQuiz(quiz: Quiz): void {
     const index = this.quizzes.indexOf(quiz, 0);
     if (index > -1) {
       this.quizzes.splice(index, 1);
